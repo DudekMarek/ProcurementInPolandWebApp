@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dane o zamowieniach{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="">Dane synoptyczne</h1>
+    <br>
+    
+    <div class="container">
+        <table class="table">
+          <thead>
+            <tr>
+                <th>Id zamówienia</th>
+                <th>Tytuł zamowieniach</th>
+                <th>Data zamówienia</th>
+                <th>Kwota zamówienia w EUR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+              <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['title'] }}</td>
+                <td>{{ row['deadline_date'] }}</td>
+                <td>{{ row['awarded_value_eur'] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+</div>
+
+{% endblock %}
