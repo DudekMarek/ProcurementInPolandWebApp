@@ -28,6 +28,17 @@
           </tbody>
         </table>
       </div>
+      
+      <div class="container d-flex align-items-center justify-content-center">
+        <form method='POST'>
+          <div class="d-flex justify-content-between mb-3 w-100" style="max-width: 250px; margin: 2px">
+            <label for="page" class="form-label">Numer strony</label>
+            <input type="page" class="form-control" id="page" name="page" placeholder="{{currentPage}}" style="max-width: 50px;">
+            <button class="btn btn-primary mw-100" type="submit">Idź</button>
+          </div>
+        </form>
+      </div>
+      
 </div>
 
 {% endblock %}

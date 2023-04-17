@@ -1,6 +1,6 @@
 import locale
 import requests
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 views = Blueprint("views", __name__)
 
@@ -8,17 +8,30 @@ views = Blueprint("views", __name__)
 def home():
     return render_template('home.html')
 
-@views.route('/dane-o-zamowieniach')
+@views.route('/dane-o-zamowieniach', methods=['GET', 'POST'])
 def procurments():
-    #Pobieranie danych z API i formatowanie 
-    allData = requests.get('https://tenders.guru/api/pl/tenders').json()
-
+    url = 'https://tenders.guru/api/pl/tenders'
+    
+    # Obsługa przechodzenia na kolejne strony
+    if request.method == 'POST':
+        page = request.form.get('page')
+        params = {"page": f"{page}"}
+        allData = requests.get(url, params=params).json()
+        
+    # Obsługa przejścia na pierwszą stronę
+    else:
+        allData = requests.get(url).json()
+    
+    
+    currentPage = allData['page_number']
+        
     #Wyciąganie z całego pliku JSON listy obiektów opisujących poszczególne zamówienia
     data = allData['data']
     for proc in data:
         proc['awarded_value_eur'] = format_number(proc['awarded_value_eur'])
+    
         
-    return render_template('procurment.html', data=data)
+    return render_template('procurment.html', data=data, currentPage=currentPage)
 
 #Funkcja służąca do formatowanie liczb w celu łatwiejszego ich czytania
 def format_number(num_str):
