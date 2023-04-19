@@ -43,3 +43,13 @@ def format_number(num_str):
     
     
     return formated_num
+
+# Wyświetlanie szczegółów dotyczących zamówienia
+@views.route('/detils/<int:id>')
+def details(id):
+    url = f'https://tenders.guru/api/pl/tenders/{id}'
+    data = requests.get(url).json()
+    data['awarded_value'] = format_number(data['awarded_value'])
+    data['awarded_value_eur'] = format_number(data['awarded_value_eur'])
+    
+    return render_template('details.html', data=data)

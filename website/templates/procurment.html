@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="text-center">
-    <h1 class="">Dane synoptyczne</h1>
+    <h1 class="">Dane o zamówieniach</h1>
     <br>
     
     <div class="container">
@@ -19,9 +19,9 @@
           <tbody>
             {% for row in data %}
               <tr>
-                <td>{{ row['id'] }}</td>
+                <td><a class="text-decoration-none text-dark fw-bold hover-link" href="{{ url_for('views.details', id=row['id']) }}">{{ row['id'] }}</a></td>
                 <td>{{ row['title'] }}</td>
-                <td>{{ row['deadline_date'] }}</td>
+                <td>{{ row['date'] }}</td>
                 <td>{{ row['awarded_value_eur'] }}</td>
               </tr>
             {% endfor %}
