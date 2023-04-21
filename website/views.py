@@ -8,6 +8,8 @@ views = Blueprint("views", __name__)
 def home():
     return render_template('home.html')
 
+
+
 @views.route('/dane-o-zamowieniach', methods=['GET', 'POST'])
 def procurments():
     url = 'https://tenders.guru/api/pl/tenders'
